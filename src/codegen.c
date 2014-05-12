@@ -1941,7 +1941,14 @@ codegen(codegen_scope *s, node *tree, int val)
     break;
 
   case NODE_BLOCK_ARG:
-    codegen(s, tree, VAL);
+    if (tree) {
+      pop();
+      genop(s, MKOP_A(OP_BLK_ARG, cursp()));
+      push();
+    }
+    else {
+      codegen(s, tree, VAL);
+    }
     break;
 
   case NODE_INT:
@@ -2885,6 +2892,10 @@ codedump(mrb_state *mrb, mrb_irep *irep)
              (GETARG_Bx(c)>>9)&0x1,
              (GETARG_Bx(c)>>4)&0x1f,
              (GETARG_Bx(c)>>0)&0xf);
+      print_lv(mrb, irep, c, RA);
+      break;
+    case OP_BLK_ARG:
+      printf("OP_BLK_ARG\tR%d", GETARG_A(c));
       print_lv(mrb, irep, c, RA);
       break;
 
