@@ -24,7 +24,7 @@ end
 def assertion_string(err, str, iso=nil, e=nil)
   msg = "#{err}#{str}"
   msg += " [#{iso}]" if iso && iso != ''
-  msg += " => #{e.message}" if e
+  msg += " => #{e.inspect}" if e
   msg += " (mrbgems: #{GEMNAME})" if Object.const_defined?(:GEMNAME)
   if $mrbtest_assert && $mrbtest_assert.size > 0
     $mrbtest_assert.each do |idx, str, diff|

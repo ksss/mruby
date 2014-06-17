@@ -70,4 +70,7 @@ MRuby::GemBox.new do |conf|
 
   # Use extensional Kernel module
   conf.gem :core => "mruby-kernel-ext"
+
+  # Use Method and UnboundMethod
+  conf.gem :core => "mruby-method"
 end
