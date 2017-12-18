@@ -562,12 +562,12 @@ mrb_io_initialize_copy(mrb_state *mrb, mrb_value copy)
     fptr_finalize(mrb, fptr_copy, FALSE);
     mrb_free(mrb, fptr_copy);
   }
-  fptr_copy = (struct mrb_io *)mrb_io_alloc(mrb);
   fptr_orig = io_get_open_fptr(mrb, orig);
 
   buf = mrb_iv_get(mrb, orig, mrb_intern_cstr(mrb, "@buf"));
   mrb_iv_set(mrb, copy, mrb_intern_cstr(mrb, "@buf"), buf);
 
+  fptr_copy = (struct mrb_io *)mrb_io_alloc(mrb);
   fptr_copy->fd = mrb_dup(mrb, fptr_orig->fd);
   fptr_copy->fd2 = mrb_dup(mrb, fptr_orig->fd2);
   fptr_copy->pid = fptr_orig->pid;
